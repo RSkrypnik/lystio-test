@@ -59,9 +59,11 @@ export const Navigation = () => {
               key={idx}
             >
               <Select.Trigger className="SelectTrigger" aria-label="Food">
-								<Select.Value>
-									<div className="flex text-[#000000] text-[15px]/[22.5px] items-center gap-2.5">{label}</div>
-								</Select.Value>
+                <Select.Value>
+                  <div className="flex text-[#000000] text-[15px]/[22.5px] items-center gap-2.5">
+                    {label}
+                  </div>
+                </Select.Value>
                 <Select.Icon className="SelectIcon">
                   <ChevronDownIcon />
                 </Select.Icon>
