@@ -1,34 +1,38 @@
 import { formatEur } from "@/lib/currency";
-import type { Tenement } from "@/types"
+import { extractTenementImg, getTenementFeatures } from "@/lib/tenement";
+import type { Tenement } from "@/types";
 
 interface TenementCardProps {
-  tenement: Tenement
+  tenement: Tenement;
 }
 
 export const TenementCard = ({ tenement }: TenementCardProps) => {
-  const tenementFeatures = [
-    { icon: "", content: `${tenement.size} m2` },
-    { icon: "", content: `${tenement.roomsBed} bed` },
-    { icon: "", content: `${tenement.roomsBath} bath`},
-  ]
-
-  const image = tenement.media ? tenement.media[0].cdnUrl : "https://reviveyouthandfamily.org/wp-content/uploads/2016/11/house-placeholder.jpg";
-
   return (
     <div className="rounded-lg">
-      <img src={image} className="rounded-lg" alt={tenement.address} height={280} />
+      <div className="w-full h-[500px] relative overflow-hidden">
+        <img
+          src={extractTenementImg(tenement)}
+          className="rounded-lg absolute inset-0 size-full"
+          alt={tenement.address}
+        />
+      </div>
       <div className="pt-4 px-2 space-y-4">
-        {
-        tenement.verified &&
+        {tenement.verified && (
           <div className="flex justify-between font-medium">
             <span className="flex text-[#5A0CFF]">Verified</span>
             <span className="text-[#000000]">{tenement.updatedAt}</span>
           </div>
-        }
-        <div className="text-[15px]/[22.5px] text-[#000000] font-semibold overflow-hidden text-ellipsis">{tenement.title}</div>
-        <div className="text-[12px]/[14.4px] text-[#000000]/[60%] font-semibold">{tenement.address}</div>
+        )}
+        <div className="text-[15px]/[22.5px] text-[#000000] font-semibold overflow-hidden text-ellipsis">
+          {tenement.title}
+        </div>
+        <div className="text-[12px]/[14.4px] text-[#000000]/[60%] font-semibold">
+          {tenement.address}
+        </div>
         <div className="flex justify-between text-[#000000]/[60%] text-base/[16.8px]">
-          {tenementFeatures.map(({ content }, idx) => <span key={idx}>{content}</span>)}
+          {getTenementFeatures(tenement).map(({ content }, idx) => (
+            <span key={idx}>{content}</span>
+          ))}
         </div>
         <div className="text-[18px]/[21.6px] font-semibold text-[#000000]">
           {formatEur(tenement.rent)}
@@ -39,5 +43,5 @@ export const TenementCard = ({ tenement }: TenementCardProps) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

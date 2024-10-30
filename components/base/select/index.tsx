@@ -2,32 +2,33 @@ import React, { PropsWithChildren } from "react";
 import * as Select from "@radix-ui/react-select";
 import cn from "classnames";
 import {
-	CheckIcon,
-	// ChevronDownIcon,
-	// ChevronUpIcon,
+  CheckIcon,
+  // ChevronDownIcon,
+  // ChevronUpIcon,
 } from "@radix-ui/react-icons";
 import "./style.css";
 
 interface SelectItemProps extends PropsWithChildren {
-	value: any
-	className?: string;
+  value: any;
+  className?: string;
 }
 
-export const SelectItem = React.forwardRef<HTMLDivElement | null, SelectItemProps>(
-	({ children, className, ...props }, forwardedRef) => {
-		return (
-			<Select.Item
-				className={cn("SelectItem", className)}
-				{...props}
-				ref={forwardedRef}
-			>
-				<Select.ItemText>{children}</Select.ItemText>
-				<Select.ItemIndicator className="SelectItemIndicator">
-					<CheckIcon />
-				</Select.ItemIndicator>
-			</Select.Item>
-		);
-	},
-);
+export const SelectItem = React.forwardRef<
+  HTMLDivElement | null,
+  SelectItemProps
+>(({ children, className, ...props }, forwardedRef) => {
+  return (
+    <Select.Item
+      className={cn("SelectItem", className)}
+      {...props}
+      ref={forwardedRef}
+    >
+      <Select.ItemText>{children}</Select.ItemText>
+      <Select.ItemIndicator className="SelectItemIndicator">
+        <CheckIcon />
+      </Select.ItemIndicator>
+    </Select.Item>
+  );
+});
 
-SelectItem.displayName = "SelectItem"
+SelectItem.displayName = "SelectItem";

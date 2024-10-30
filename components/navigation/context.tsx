@@ -1,25 +1,32 @@
-import { createContext, useState, type Dispatch, type PropsWithChildren, type SetStateAction } from "react";
+import {
+  createContext,
+  useState,
+  type Dispatch,
+  type PropsWithChildren,
+  type SetStateAction,
+} from "react";
 
 interface NavigationContextType {
-  filter: object
-  setFilter: Dispatch<SetStateAction<object>>
+  filter: object;
+  setFilter: Dispatch<SetStateAction<object>>;
 }
 
 const initState = {
   filter: {
-    rent: [0, 99999]
+    rent: [0, 99999],
   },
-  setFilter: () => {}
-}
+  setFilter: () => {},
+};
 
-export const NavigationContext = createContext<NavigationContextType>(initState)
+export const NavigationContext =
+  createContext<NavigationContextType>(initState);
 
-export const NavigationProvider = ({children}: PropsWithChildren) => {
+export const NavigationProvider = ({ children }: PropsWithChildren) => {
   const [filter, setFilter] = useState(initState);
 
   return (
     <NavigationContext.Provider value={{ filter, setFilter }}>
       {children}
     </NavigationContext.Provider>
-  )
-}
+  );
+};
