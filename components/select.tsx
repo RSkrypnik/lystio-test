@@ -6,7 +6,6 @@ import {
   // ChevronDownIcon,
   // ChevronUpIcon,
 } from "@radix-ui/react-icons";
-import "./style.css";
 
 interface SelectItemProps extends PropsWithChildren {
   value: any;

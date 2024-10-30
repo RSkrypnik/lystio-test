@@ -8,7 +8,8 @@ import mapboxgl from "mapbox-gl";
 import type { Tenement } from "@/types";
 import { TenementCard, TenementMapCard } from "@/components";
 import { NavigationContext } from "@/components/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { FadeAnim } from "@/components/animation";
 
 export default function Home() {
   const [activeId, setActiveId] = useState(-1);
@@ -96,14 +97,9 @@ export default function Home() {
           })}
           <AnimatePresence>
             {activeTenement && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                exit={{ opacity: 0 }}
-              >
+              <FadeAnim>
                 <TenementMapCard tenement={activeTenement} />
-              </motion.div>
+              </FadeAnim>
             )}
           </AnimatePresence>
         </>

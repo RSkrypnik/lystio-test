@@ -1,5 +1,5 @@
 import * as Select from "@radix-ui/react-select";
-import { SelectItem } from "@/components/base";
+import { SelectItem } from "@/components";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { useContext } from "react";
 import { NavigationContext } from "./context";
