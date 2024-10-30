@@ -48,7 +48,7 @@ export const Navigation = () => {
         {items.map(({ label, key, items }, idx) => {
           return items ? (
             <Select.Root
-              // @ts-expect-error radix ui type issue
+              // @ts-expect-error radix ui type issue https://github.com/radix-ui/primitives/issues/3180
               value={filter}
               onValueChange={(value) =>
                 setFilter((prev) => ({

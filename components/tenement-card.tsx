@@ -38,8 +38,8 @@ export const TenementCard = ({ tenement }: TenementCardProps) => {
         <div className="text-[18px]/[21.6px] font-semibold text-[#000000]">
           {formatEur(tenement.rent)}
         </div>
-        <div className="flex font-medium">
-          <span className="text-[#000000]/[60%]">Available from:{" "}</span>
+        <div className="flex gap-1 font-medium">
+          <span className="text-[#000000]/[60%]">Available from:</span>
           <span className="text-[#000000]">
             {tenement.availableFrom ? formatDate(tenement.availableFrom) : "Immediately"}
           </span>
