@@ -1,4 +1,5 @@
 import { formatEur } from "@/lib/currency";
+import { formatDate } from "@/lib/date-fns";
 import { extractTenementImg, getTenementFeatures } from "@/lib/tenement";
 import type { Tenement } from "@/types";
 
@@ -37,9 +38,11 @@ export const TenementCard = ({ tenement }: TenementCardProps) => {
         <div className="text-[18px]/[21.6px] font-semibold text-[#000000]">
           {formatEur(tenement.rent)}
         </div>
-        <div className="flex">
-          <span className="text-[#000000]/[60%]">Available from:</span>
-          <span className="text-[#000000]">{tenement.availableFrom}</span>
+        <div className="flex font-medium">
+          <span className="text-[#000000]/[60%]">Available from:{" "}</span>
+          <span className="text-[#000000]">
+            {tenement.availableFrom ? formatDate(tenement.availableFrom) : "Immediately"}
+          </span>
         </div>
       </div>
     </div>

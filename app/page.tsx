@@ -1,5 +1,5 @@
 "use client";
-import { fetchTenements, fetchTenementsMap } from "@/lib/tenement";
+import { fetchTenements } from "@/lib/tenement";
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useRef, useState } from "react";
 import Map, { Marker, type MapRef } from "react-map-gl";
@@ -8,6 +8,7 @@ import mapboxgl from "mapbox-gl";
 import type { Tenement } from "@/types";
 import { TenementCard, TenementMapCard } from "@/components";
 import { NavigationContext } from "@/components/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Home() {
   const [activeId, setActiveId] = useState(-1);
@@ -21,7 +22,7 @@ export default function Home() {
   const mapRef = useRef<MapRef>(null);
 
   const fetchData = async () => {
-    const tenements = await fetchTenements(filter);
+    const tenements = await fetchTenements({ filter });
     calculateCoords(tenements);
     return tenements;
   };
@@ -69,7 +70,7 @@ export default function Home() {
     <div className="flex w-full h-dvh px-5 mt-[5px] gap-1">
       <Map
         mapboxAccessToken="pk.eyJ1IjoibHlzdGlvIiwiYSI6ImNtMjA3cmFoejBnMngycXM4anNuNXFmaTQifQ.y-WiEerYZrFOm8Xd8a7GwQ"
-        mapLib={import("mapbox-gl")}
+        mapLib={import("mapbox-gl") as any}
         initialViewState={coords}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         ref={mapRef}
@@ -93,7 +94,18 @@ export default function Home() {
               </Marker>
             );
           })}
-          {activeTenement && <TenementMapCard tenement={activeTenement} />}
+          <AnimatePresence>
+            {activeTenement && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                exit={{ opacity: 0 }}
+              >
+                <TenementMapCard tenement={activeTenement} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </>
       </Map>
       <div className="grow basis-1/2">
